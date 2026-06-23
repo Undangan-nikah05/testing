@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Undangan Pernikahan</title>
+  <style>
+    :root{--bg:#fff6f6;--card:#fff;--accent:#b33}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;margin:0;background:linear-gradient(180deg,var(--bg),#fff);display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
+    .card{background:var(--card);max-width:760px;width:100%;box-shadow:0 8px 30px rgba(0,0,0,.08);border-radius:12px;overflow:hidden}
+    .hero{background:linear-gradient(90deg,rgba(179,51,51,.06),rgba(179,51,51,.02));padding:40px 28px;text-align:center}
+    .names{font-family:Georgia,serif;color:var(--accent);font-size:32px;margin:6px 0}
+    .meta{color:#444;margin:6px 0}
+    .content{padding:28px}
+    .section{margin-bottom:18px}
+    .btn{display:inline-block;background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none}
+    .variants{margin-top:12px}
+    .footer{background:#fafafa;padding:16px;text-align:center;color:#666;font-size:13px}
+    @media (max-width:520px){.names{font-size:22px}}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="hero">
+      <div style="font-size:14px;color:#777">Dengan memohon rahmat dan ridho Allah SWT</div>
+      <div class="names" id="names">[Nama Pengantin Wanita] &amp; [Nama Pengantin Pria]</div>
+      <div class="meta" id="eventLine">Mengundang ke acara pernikahan kami</div>
+    </div>
+    <div class="content">
+      <div class="section">
+        <strong>Waktu</strong>
+        <div id="datetime">[Hari, Tanggal], pukul [Jam]</div>
+      </div>
+      <div class="section">
+        <strong>Tempat</strong>
+        <div id="venue">[Nama Gedung / Alamat Lengkap]</div>
+        <div style="margin-top:8px"><a id="mapLink" href="#" target="_blank" class="btn">Lihat di peta</a></div>
+      </div>
+      <div class="section">
+        <strong>Teks Undangan</strong>
+        <div class="variants">
+          <div id="formal">[Versi Formal: Mohon kehadiran Bapak/Ibu/Saudara/i ...]</div>
+          <div id="casual" style="margin-top:8px;display:none">[Versi Santai: Yuk merayakan bersama kami pada ...]</div>
+        </div>
+        <div style="margin-top:10px">
+          <a href="#" class="btn" id="toggleBtn">Tampilkan Versi Santai</a>
+        </div>
+      </div>
+      <div class="section">
+        <strong>RSVP</strong>
+        <div id="rsvp">Hubungi: [Nama] — [No. WhatsApp]</div>
+      </div>
+      <div class="section" style="text-align:center">
+        <a href="#" class="btn" id="addToCalendar">Tambahkan ke Kalender</a>
+      </div>
+    </div>
+    <div class="footer">Terima kasih atas doa dan kehadiran Anda.</div>
+  </div>
+
+  <script>
+    // Contoh: ganti data berikut dengan data acara sebenarnya.
+    const data = {
+      bride: 'Ayu Nirmala',
+      groom: 'Doni Saputra',
+      dateLabel: 'Sabtu, 10 Juli 2026',
+      time: '10.00 WIB',
+      venue: 'Gedung Serbaguna Melati — Jl. Melati No.12, Jakarta',
+      mapUrl: 'https://www.google.com/maps',
+      formal: 'Dengan hormat, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara pernikahan putra-putri kami. Kehadiran dan doa restu Anda sangat kami harapkan.',
+      casual: 'Ayo datang dan rayakan bersama kami! Makan-makan, foto, dan bersenang-senang bersama keluarga dan sahabat.' ,
+      rsvp: 'Ibu Sari — 0812-3456-7890'
+    };
+
+    document.getElementById('names').textContent = data.bride + ' & ' + data.groom;
+    document.getElementById('datetime').textContent = data.dateLabel + ', pukul ' + data.time;
+    document.getElementById('venue').textContent = data.venue;
+    document.getElementById('mapLink').href = data.mapUrl;
+    document.getElementById('formal').textContent = data.formal;
+    document.getElementById('casual').textContent = data.casual;
+    document.getElementById('rsvp').textContent = 'Hubungi: ' + data.rsvp;
+
+    const toggleBtn = document.getElementById('toggleBtn');
+    toggleBtn.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const f = document.getElementById('formal');
+      const c = document.getElementById('casual');
+      if(c.style.display === 'none'){
+        c.style.display = 'block'; f.style.display = 'none'; toggleBtn.textContent = 'Tampilkan Versi Formal';
+      } else { c.style.display = 'none'; f.style.display = 'block'; toggleBtn.textContent = 'Tampilkan Versi Santai'; }
+    });
+
+    document.getElementById('addToCalendar').addEventListener('click', (e)=>{
+      e.preventDefault();
+      // Buat link .ics sederhana
+      const start = new Date('2026-07-10T10:00:00');
+      const end = new Date(start.getTime()+3*60*60*1000);
+      const pad=(n)=>String(n).padStart(2,'0');
+      function toICS(d){return d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+pad(d.getUTCSeconds())+'Z'}
+      const ics = `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nSUMMARY:${data.bride} & ${data.groom} — Pernikahan\nDTSTART:${toICS(start)}\nDTEND:${toICS(end)}\nDESCRIPTION:${data.formal}\nLOCATION:${data.venue}\nEND:VEVENT\nEND:VCALENDAR`;
+      const blob = new Blob([ics],{type:'text/calendar'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'undangan.ics'; document.body.appendChild(a); a.click(); a.remove();
+    });
+  </script>
+</body>
+</html>

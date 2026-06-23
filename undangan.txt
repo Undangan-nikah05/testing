@@ -1,0 +1,36 @@
+Undangan Pernikahan — Teks Template
+
+Versi Formal:
+Dengan hormat,
+Kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir pada acara pernikahan putra-putri kami:
+
+  [Nama Pengantin Wanita]
+  &
+  [Nama Pengantin Pria]
+
+Yang insya Allah akan dilaksanakan pada:
+  Hari, Tanggal: [contoh: Sabtu, 10 Juli 2026]
+  Waktu: [contoh: 10.00 WIB]
+  Tempat: [Nama Gedung / Alamat Lengkap]
+
+Kehadiran dan doa restu Bapak/Ibu/Saudara/i sangat kami harapkan.
+
+Hormat kami,
+[Nama Keluarga]
+
+
+Versi Santai:
+Hai semuanya!
+Ayo hadir dan rayakan pesta pernikahan kami:
+
+[Nama Pengantin Wanita] & [Nama Pengantin Pria]
+
+Waktu: [Hari, Tanggal], pukul [Jam]
+Tempat: [Alamat]
+
+RSVP: [Nama] — [No. WA]
+
+Catatan untuk penyelenggara/undangan digital:
+- Ganti teks di file undangan.html bagian data (variabel `data`) sesuai detail acara.
+- Untuk cetak: buka undangan.html di browser lalu pilih Print → Save as PDF.
+- Untuk undangan digital: unggah undangan.html ke hosting atau kirimkan link; tambahkan foto bila perlu.
